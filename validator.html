@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CTF 2024</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300&family=Major+Mono+Display&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            background-color: #0f1111; 
+            scrollbar-color: #3b3e3f #242627;
+            color: #fafafa;
+            flex-direction: column;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+        h2 {
+            font-family: 'Major Mono Display', monospace;
+        }
+        h3 {
+            font-family: 'IBM Plex Mono', monospace;
+        }
+        p {
+            font-family: 'IBM Plex Mono', monospace;
+        }
+        ul {
+            font-family: monospace;
+        }
+        a {
+            color: #3391FF;
+        }
+        .container {
+            display: flex;
+            justify-content: space-around;
+            width: 92%;
+            max-width: 1400px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .side-container {
+            background: #181A1B;
+            width: 28%;
+            height: 500px;
+            padding: 20px;
+            border-radius: 14px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            overflow-y: auto;
+        }
+        .form-container {
+            background: #181A1B;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        input[type="text"] {
+            width: 200px;
+            padding: 10px;
+            margin: 10px 0;
+            color: #ddd;
+            background-color: #222;
+            border: 1px solid #555;
+            border-radius: 18px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #003C8B;
+            color: #fafafa;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #00122A;
+        }
+        .leaderboard-list {
+            max-height: 112px;
+            overflow-y: auto;
+        }
+        .statusMessage {
+            color: #fafafa;
+            margin-top: 20px;
+            height: 20px;
+            font-size: 1.2em;
+            padding: 5px 0;
+        }
+        .major-mono-display-regular {
+            font-family: "Major Mono Display", monospace;
+            font-weight: 400;
+            font-style: normal;
+        }
+        .ibm-plex-mono-light {
+            font-family: "IBM Plex Mono", monospace;
+            font-weight: 300;
+            font-style: normal;
+        }
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .side-container, .form-container {
+                width: 100%;
+                height: auto;
+                margin-bottom: 20px;
+                color: #8b0900
+            }
+        }
+        </style>
+</head>
+<body>
+    <div class="container">
+        
+        <div class="side-container">
+            <h2>Challenge 1</h2>
+            <p>A set of insecurely encrypted messages have been found. Decrypt these messages to recover the flag.</p>
+            <a href="https://github.com/0xJVR/CTF/EncryptedMessageA" download="EncryptedMessageA">EncryptedMessageA</a>
+            <a href="https://github.com/0xJVR/CTF/EncryptedMessageB" download="EncryptedMessageB">EncryptedMessageB</a>
+            <hr>
+            <h2>Challenge 2</h2>
+            <p>Retrieve the flag from a Linux executable by exploiting a vulnerability. Focus on common user input vulnerabilities of the C programming language.</p>
+            <a href="https://github.com/0xJVR/CTF/binary" download="binary">ELF binary</a>
+        </div>
+
+        <div class="form-container">
+            <label for="name">Your Name:</label>
+            <input type="text" placeholder="Name (Will be public)" id="name">
+            <label for="flag">Found Flag:</label>
+            <input type="text" placeholder="Flag" id="flag" oninput="filterASCII(this);resetValidatorState();">
+            <button id="validationButton" onclick="validateFlag()">Validate</button>
+            <div class="statusMessage" id="statusMessage">CTF 2024</div>
+        </div>
+
+        <div class="side-container">
+            <h2>Leaderboard</h2>
+            <div id="leaderboard-container"></div>
+        </div>
+
+    </div>
+    <script>
+
+    const _0x331534=_0x3229;(function(_0x39963b,_0x40d99a){const _0xfb937c=_0x3229,_0x3f8e34=_0x39963b();while(!![]){try{const _0x3479ee=parseInt(_0xfb937c(0x163))/0x1+parseInt(_0xfb937c(0x14d))/0x2+parseInt(_0xfb937c(0x169))/0x3*(-parseInt(_0xfb937c(0x182))/0x4)+-parseInt(_0xfb937c(0x179))/0x5*(parseInt(_0xfb937c(0x145))/0x6)+parseInt(_0xfb937c(0x16b))/0x7+parseInt(_0xfb937c(0x14f))/0x8+-parseInt(_0xfb937c(0x16e))/0x9*(parseInt(_0xfb937c(0x15d))/0xa);if(_0x3479ee===_0x40d99a)break;else _0x3f8e34['push'](_0x3f8e34['shift']());}catch(_0x4bc7b5){_0x3f8e34['push'](_0x3f8e34['shift']());}}}(_0x6b27,0x3593c),document[_0x331534(0x177)](_0x331534(0x13c),function(){fetchLeaderboardData();}),document[_0x331534(0x151)](_0x331534(0x150))['addEventListener'](_0x331534(0x153),function(_0x5c19cb){const _0x5d1479=_0x331534;_0x5c19cb[_0x5d1479(0x181)]===0xd&&(_0x5c19cb['preventDefault'](),document[_0x5d1479(0x151)](_0x5d1479(0x141))[_0x5d1479(0x144)]());}));function filterASCII(_0x521967){const _0x1ecce2=_0x331534;let _0x545049=/^[ -~\r\n\t]*$/;!_0x545049[_0x1ecce2(0x162)](_0x521967[_0x1ecce2(0x16f)])&&(_0x521967[_0x1ecce2(0x16f)]=_0x521967[_0x1ecce2(0x16f)][_0x1ecce2(0x180)](/[^\\x00-\\x7F]/g,''));}function _0x6b27(){const _0x635c4=['317379vnmIeH','5c2dafdf0181c93d5c558a8133c16f7a9dcb08a0dad69f6c96328f6dc9661e4f380ac54019a9c0c621318677fb9d960b41433da543f601e41a77e7385de91a0d','227388DWJDOC','digest','leaderboard-container','36WYlckg','value','appendChild','default','log','Valid\x20Flag!','createElement','<h3>Challenge\x20','keys','addEventListener','</h3><hr><ul\x20class=\x27leaderboard-list\x27></ul>','18095fgxVzM','numeric','toString','catch','from','SHA-512','forEach','replace','keyCode','4exMtkd','debug','Invalid\x20Flag.\x20Try\x20again!','DOMContentLoaded','2-digit','innerHTML','style','timestamp','validationButton','querySelector','div','click','642ICqVEz','#008B4E','#8b0900','padStart','map','stringify','<p>No\x20data\x20yet.</p>','challenge','861706cZNugD','POST','371056mlULlm','flag','getElementById','textContent','keydown','no-cors','.form-container','statusMessage','then','push','9d2be73ea6da84f96e64caac41d80bfe2bfc63f597be06c4c87a87030df1d590d96178dea9068545e3f7aaac4b373d3acc7c2acc545da8fefbed0f053eecb3cd','https://script.google.com/macros/s/AKfycbwOOx6ad_FS4HlXF7euYrZweEN1ws-riBAX-s1ty4p_QXHxJLbrfQ1M7wL1labxLxQvXQ/exec','CTF\x202024','follow','340430KdCAta','json','subtle','length','Success:','test','338931nrSMIh','name','toLocaleString','backgroundColor','join','.leaderboard-list'];_0x6b27=function(){return _0x635c4;};return _0x6b27();}async function hashValue(_0x11cca9){const _0x5d92e8=_0x331534;let _0x301868=new TextEncoder()['encode'](_0x11cca9),_0x2b3911=_0x301868;for(let _0x53de55=0x0;_0x53de55<0x2**0xe;_0x53de55++){_0x2b3911=await crypto[_0x5d92e8(0x15f)][_0x5d92e8(0x16c)](_0x5d92e8(0x17e),_0x2b3911);}return Array[_0x5d92e8(0x17d)](new Uint8Array(_0x2b3911))[_0x5d92e8(0x149)](_0x4f8d43=>_0x4f8d43[_0x5d92e8(0x17b)](0x10)[_0x5d92e8(0x148)](0x2,'0'))[_0x5d92e8(0x167)]('');}async function validateFlag(){const _0x2eb097=_0x331534,_0x390f44=document['getElementById'](_0x2eb097(0x164))[_0x2eb097(0x16f)],_0x3976df=document[_0x2eb097(0x151)](_0x2eb097(0x150))[_0x2eb097(0x16f)],_0x206355=await hashValue(_0x3976df),_0x445a05=[_0x2eb097(0x16a),_0x2eb097(0x159),'bbc4f2d4d14bff3635c0e36e27cd0948011f4536255a9943ab2acbb6a8ff6f6cce80e474098b6bdae3025ac756eb8567519228aae8648d46c9921dc8105cc04c'];console[_0x2eb097(0x183)](_0x206355);const _0x42b8bc=document[_0x2eb097(0x142)](_0x2eb097(0x155)),_0x21c482=document[_0x2eb097(0x151)](_0x2eb097(0x156)),_0x3368f5=_0x445a05['indexOf'](_0x206355);_0x3368f5!==-0x1?(_0x42b8bc[_0x2eb097(0x13f)][_0x2eb097(0x166)]=_0x2eb097(0x146),statusMessage[_0x2eb097(0x152)]=_0x2eb097(0x173),sendDataToServer(_0x3368f5,_0x390f44,_0x3976df)):(_0x42b8bc['style'][_0x2eb097(0x166)]=_0x2eb097(0x147),statusMessage[_0x2eb097(0x152)]=_0x2eb097(0x184));}function resetValidatorState(){const _0x18f823=_0x331534,_0x1a6baf=document[_0x18f823(0x142)](_0x18f823(0x155)),_0x263c3f=document[_0x18f823(0x151)](_0x18f823(0x156));_0x1a6baf[_0x18f823(0x13f)][_0x18f823(0x166)]='',_0x263c3f['textContent']=_0x18f823(0x15b);}function _0x3229(_0x451dae,_0x399f9c){const _0x6b2715=_0x6b27();return _0x3229=function(_0x32296c,_0x12dbfc){_0x32296c=_0x32296c-0x13c;let _0x2b2fde=_0x6b2715[_0x32296c];return _0x2b2fde;},_0x3229(_0x451dae,_0x399f9c);}function sendDataToServer(_0x45e5b1,_0x43a89a,_0x38ec32){const _0x3e40ef=_0x331534;fetch('https://script.google.com/macros/s/AKfycbwOOx6ad_FS4HlXF7euYrZweEN1ws-riBAX-s1ty4p_QXHxJLbrfQ1M7wL1labxLxQvXQ/exec',{'method':_0x3e40ef(0x14e),'mode':_0x3e40ef(0x154),'redirect':_0x3e40ef(0x15c),'headers':{'Content-Type':'application/json'},'body':JSON[_0x3e40ef(0x14a)]({'challenge':_0x45e5b1,'name':_0x43a89a,'flag':_0x38ec32})})[_0x3e40ef(0x157)](_0xa4f5f5=>_0xa4f5f5[_0x3e40ef(0x15e)]())[_0x3e40ef(0x157)](_0x42327e=>console[_0x3e40ef(0x172)](_0x3e40ef(0x161),_0x42327e))[_0x3e40ef(0x17c)](_0x4eb287=>{console['error']('Error:',_0x4eb287);});}async function fetchLeaderboardData(){const _0x34710d=_0x331534,_0x553ecd=await fetch(_0x34710d(0x15a)),_0x23178b=await _0x553ecd[_0x34710d(0x15e)](),_0x53dd90=document[_0x34710d(0x151)](_0x34710d(0x16d));if(_0x23178b[_0x34710d(0x160)]<=0x0){_0x53dd90[_0x34710d(0x13e)]=_0x34710d(0x14b);return;}const _0x31e540=_0x23178b['reduce']((_0x307fa2,_0x58dbd8)=>{const _0x5aeb7f=_0x34710d;return _0x307fa2[_0x58dbd8['challenge']]=_0x307fa2[_0x58dbd8[_0x5aeb7f(0x14c)]]||[],_0x307fa2[_0x58dbd8[_0x5aeb7f(0x14c)]][_0x5aeb7f(0x158)](_0x58dbd8),_0x307fa2;},{});Object[_0x34710d(0x176)](_0x31e540)[_0x34710d(0x17f)](_0x5dfcfd=>{const _0x232091=_0x34710d,_0x2800c3=document[_0x232091(0x174)](_0x232091(0x143));_0x2800c3['innerHTML']=_0x232091(0x175)+_0x5dfcfd+_0x232091(0x178);const _0x13154d=_0x2800c3[_0x232091(0x142)](_0x232091(0x168));_0x31e540[_0x5dfcfd][_0x232091(0x17f)](_0x277c9a=>{const _0x48730c=_0x232091,_0x1b4ca2=document[_0x48730c(0x174)]('li');_0x1b4ca2[_0x48730c(0x152)]=_0x277c9a['name']+'\x20-\x20'+formatTimestamp(_0x277c9a[_0x48730c(0x140)]),_0x13154d[_0x48730c(0x170)](_0x1b4ca2);}),_0x53dd90[_0x232091(0x170)](_0x2800c3);});}function formatTimestamp(_0x11e3c3){const _0x337f37=_0x331534,_0x459492=new Date(_0x11e3c3);return _0x459492[_0x337f37(0x165)](_0x337f37(0x171),{'year':_0x337f37(0x17a),'month':_0x337f37(0x13d),'day':'2-digit','hour':_0x337f37(0x13d),'minute':'2-digit'});}
+
+    </script>
+</body>
+</html>
